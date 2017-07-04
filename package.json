@@ -12,7 +12,13 @@
     "url": "https://github.com/chromatixau/gitlab-network-graph/issues"
   },
   "homepage": "https://github.com/chromatixau/gitlab-network-graph#readme",
-  "devDependencies": {
-    "raphael": "^2.2.7"
+  "dependencies": {
+    "jquery": "^3.2.1",
+    "raphael": "^2.2.7",
+    "webpack": "^3.0.0"
+  },
+  "scripts": {
+    "webpack": "webpack --config config/webpack.config.js",
+    "webpack-prod": "NODE_ENV=production webpack --config config/webpack.config.js"
   }
 }
