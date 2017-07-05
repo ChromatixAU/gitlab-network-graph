@@ -19,6 +19,9 @@ In addition, we've added some simple tools to locally generate suitably formatte
 
 That's classified. For now. Instructions for use are coming soon!
 
+In progress:
+* Run `npm run webpack`
+
 ## License
 
 MIT. See [LICENSE](LICENSE).

@@ -18,7 +18,6 @@
     "webpack": "^3.0.0"
   },
   "scripts": {
-    "webpack": "webpack --config config/webpack.config.js",
-    "webpack-prod": "NODE_ENV=production webpack --config config/webpack.config.js"
+    "webpack": "webpack --config config/webpack.config.js"
   }
 }
