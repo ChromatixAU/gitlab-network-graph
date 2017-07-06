@@ -17,9 +17,10 @@ In addition, we've added some simple tools to locally generate suitably formatte
 
 ## How?
 
-That's classified. For now. Actually there are some basic instructions, more coming later:
-
 1. Clone this repository locally (into somewhere you can access through your local webserver).
+
+   `git clone https://github.com/ChromatixAU/gitlab-network-graph.git`
+
 2. `cd` into the repository you want to get the network graph for.
 3. Run `/path/to/gitlab-network-graph/scripts/network.sh`. This will take a little while the first time you run it.
 4. Open http://localhost/gitlab-network-graph in your browser (assuming that's where it's accessible from).
