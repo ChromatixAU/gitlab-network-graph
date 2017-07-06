@@ -11,7 +11,7 @@ Plus, sometimes its nice to see a good graph _before_ you push to your remote. :
 
 ## What?
 
-This repository is pretty much a duplication of [GitLab's network graph JS](https://github.com/gitlabhq/gitlabhq/tree/v9.3.4/app/assets/javascripts/network) as of GitLab v9.3.4, using a stripped-down version of [GitLab's webpack config](https://github.com/gitlabhq/gitlabhq/blob/v9.3.4/config/webpack.config.js) as of the same version.
+This repository is pretty much a duplication of [GitLab's network graph JS](https://github.com/gitlabhq/gitlabhq/tree/v9.3.4/app/assets/javascripts/network) as of GitLab v9.3.4, using a stripped-down version of [GitLab's webpack config](https://github.com/gitlabhq/gitlabhq/blob/v9.3.4/config/webpack.config.js) as of the same version. GitLab's network graph in turn uses [Raphaël](http://dmitrybaranovskiy.github.io/raphael/).
 
 In addition, we've added some simple tools to locally generate suitably formatted JSON output of your git log.
 
