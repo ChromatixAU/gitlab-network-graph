@@ -37,7 +37,7 @@ Then, whenever you want to see the network graph pop up on your screen, from wit
 
     git network
 
-_This tool has been tested in Git Bash on Windows 10, with node.js v7.0.0, npm 3.10.8, and perl v5.22.1. Your mileage may vary._
+_This tool has been tested in Git Bash on Windows 10 64 bit, with node.js v7.0.0, npm 3.10.8, perl v5.22.1 and Chrome 59. Your mileage may vary._
 
 ## TODO
 
