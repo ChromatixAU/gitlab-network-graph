@@ -42,11 +42,8 @@ _This tool has been tested in Git Bash on Windows 10, with node.js v7.0.0, npm 3
 ## TODO
 
 * Tweak the parent 'space' detection to match how GitLab does it - we're not quite there yet.
-* See all the branches....?
-* Support tooltips like GitLab does.
-* Support scrolling down the page so you can actually see the whole history!
-* Fix the slight horizontal scroll.
-* Maybe add some other styling to the page, like removing the margin and adding a small header/footer with a link to this repo.
+* Support the fancy tooltips like GitLab does.
+* Maybe add to the output a small header/footer with a link to this repo or something.
 * Look at the possibility of making a hosted version of this that uses the GitHub API to pull commit lists from there, for _any_ repository.
 
 ## Contributing

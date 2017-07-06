@@ -1,0 +1,12 @@
+
+/* Author: Tim Malone, Chromatix Digital Agency */
+/* Date:   2017-07-06 */
+
+body {
+  margin: 0;
+}
+
+.network-graph {
+  overflow-y: scroll;
+  overflow-x: hidden;
+}
