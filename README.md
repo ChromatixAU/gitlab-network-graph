@@ -45,6 +45,7 @@ _This tool has been tested in Git Bash on Windows 10, with node.js v7.0.0, npm 3
 * Support the fancy tooltips like GitLab does.
 * Maybe add to the output a small header/footer with a link to this repo or something.
 * Look at the possibility of making a hosted version of this that uses the GitHub API to pull commit lists from there, for _any_ repository.
+* Look into what the JS global `findFileURL` does, whether we need it, and whether we could create that from the repository remote (eg. GitHub's find file URL would be eg. `https://github.com/gitlabhq/gitlabhq/find/master`, whereas GitLab's is `/find_file/master`)
 
 ## Contributing
 

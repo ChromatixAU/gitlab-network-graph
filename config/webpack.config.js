@@ -10,6 +10,7 @@ var config = {
   context: path.join( ROOT_PATH, 'app/assets/javascripts' ),
 
   entry: {
+    main:    './main.js',
     network: './network/network_bundle.js',
   },
 

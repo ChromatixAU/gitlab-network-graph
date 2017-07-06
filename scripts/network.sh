@@ -7,14 +7,15 @@
 echo
 
 # If npm hasn't been installed yet, install it.
-if [ ! -d `dirname $0`/../node_modules ]; then
+# We check for mousetrap because that's the latest dependency we've added.
+if [ ! -d `dirname $0`/../node_modules/mousetrap ]; then
   echo Installing node modules. This may take some time, but only needs to happen once...
   ( cd `dirname $0`/../; npm install; )
   echo
 fi
 
 # If frontend scripts don't exist yet, run webpack.
-if [ ! -f `dirname $0`/../public/assets/webpack/network.bundle.js ]; then
+if [ ! -f `dirname $0`/../public/assets/webpack/main.bundle.js ]; then
   echo Building frontend scripts, this only needs to happen once...
   ( cd `dirname $0`; npm run webpack; )
   echo
