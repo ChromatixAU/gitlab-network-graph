@@ -13,9 +13,11 @@ Plus, sometimes its nice to see a good graph _before_ you push to your remote. :
 
 This repository is pretty much a duplication of [GitLab's network graph JS](https://github.com/gitlabhq/gitlabhq/tree/v9.3.4/app/assets/javascripts/network) as of GitLab v9.3.4, using a stripped-down version of [GitLab's webpack config](https://github.com/gitlabhq/gitlabhq/blob/v9.3.4/config/webpack.config.js) as of the same version.
 
-In addition, we've added some simple tools to locally generate suitably formatted JSON output of your git log (or at least, we will soon).
+In addition, we've added some simple tools to locally generate suitably formatted JSON output of your git log.
 
 ## How?
+
+Firstly, [install node.js](https://nodejs.org/en/download/current/) if you don't already have it. Then:
 
 1. Clone this repository locally (into somewhere you can access through your local webserver).
 
@@ -25,7 +27,7 @@ In addition, we've added some simple tools to locally generate suitably formatte
 3. Run `/path/to/gitlab-network-graph/scripts/network.sh`. This will take a little while the first time you run it.
 4. Open http://localhost/gitlab-network-graph in your browser (assuming that's where it's accessible from).
 
-To condense scripts 3 and 4 later on, you may want to add a git alias.
+To condense steps 3 and 4 later on, you may want to add a git alias:
 
 Run this once, replacing both the path you've cloned gitlab-network-graph to, and the relevant path to your local webserver:
 
@@ -35,14 +37,17 @@ Then, whenever you want to see the network graph pop up on your screen, from wit
 
     git network
 
+_This tool has been tested in Git Bash on Windows 10, with node.js v7.0.0, npm 3.10.8, and perl v5.22.1. Your mileage may vary._
+
 ## TODO
 
-* Tweak the parent 'space' detection to match how GitLab does it.
-* See all branches....?
+* Tweak the parent 'space' detection to match how GitLab does it - we're not quite there yet.
+* See all the branches....?
 * Support tooltips like GitLab does.
-* Support scrolling down the page.
+* Support scrolling down the page so you can actually see the whole history!
 * Fix the slight horizontal scroll.
-* Work out if it's possible to automatically open the network graph in Chrome (see bottom of network.sh).
+* Maybe add some other styling to the page, like removing the margin and adding a small header/footer with a link to this repo.
+* Look at the possibility of making a hosted version of this that uses the GitHub API to pull commit lists from there, for _any_ repository.
 
 ## Contributing
 

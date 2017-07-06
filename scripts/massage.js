@@ -1,5 +1,8 @@
 #!/usr/bin/env node
 
+// Author: Tim Malone, Chromatix Digital Agency
+// Date:   2017-07-06
+
 const fs       = require( 'fs' );
 const crypto   = require( 'crypto' );
 const filename = __dirname + '/../.data/data.json';

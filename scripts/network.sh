@@ -1,5 +1,9 @@
 #!/usr/bin/env bash
 
+# Author: Tim Malone, Chromatix Digital Agency
+# Date:   2017-07-05
+
+# We use blank lines in this script to make each stage of processing a bit clearer.
 echo
 
 # If npm hasn't been installed yet, install it.
@@ -46,11 +50,6 @@ git log --all --pretty=format:'    {
 # Massage the JSON further than what we can do with git log.
 echo Massaging data...
 `dirname $0`/massage.js
-
-# TODO: Open Chrome with the network graph.
-# We can't do it simply yet, because ajax cross-origin not supported for local files.
-#echo Opening browser...
-#start chrome `dirname $0`/../index.html
 
 echo
 echo Done.
