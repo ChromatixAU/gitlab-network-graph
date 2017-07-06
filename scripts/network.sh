@@ -2,10 +2,17 @@
 
 echo
 
+# If npm hasn't been installed yet, install it.
+if [ ! -d `dirname $0`/../node_modules ]; then
+  echo Installing node modules. This may take some time, but only needs to happen once...
+  ( cd `dirname $0`/../; npm install; )
+  echo
+fi
+
 # If frontend scripts don't exist yet, run webpack.
 if [ ! -f `dirname $0`/../public/assets/webpack/network.bundle.js ]; then
   echo Building frontend scripts, this only needs to happen once...
-  npm run webpack
+  ( cd `dirname $0`; npm run webpack; )
   echo
 fi
 
@@ -13,7 +20,11 @@ fi
 # Note that we're using @@ instead of " so that we can easily escape quotes inside the commit message.
 # HT: https://gist.github.com/textarcana/1306223
 # HT: https://git-scm.com/docs/git-log#_pretty_formats
-echo Building git log...
+echo Exporting git log...
+if [ ! -d `dirname $0`/../.data ]; then
+  mkdir `dirname $0`/../.data
+fi
+touch `dirname $0`/../.data/data.json
 git log --all --pretty=format:'    {
       @@author@@: {
         @@email@@: @@%aE@@,
