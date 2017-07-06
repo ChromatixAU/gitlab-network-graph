@@ -19,10 +19,18 @@ In addition, we've added some simple tools to locally generate suitably formatte
 
 That's classified. For now. Actually there are some basic instructions, more coming later:
 
-* Clone this repository locally (into somewhere you can access through your local webserver).
-* `cd` into the repository you want to get the network graph for.
-* Run `/path/to/gitlab-network-graph/scripts/network.sh`.
-* Open http://localhost/gitlab-network-graph in your browser (assuming that's where it's accessible from).
+1. Clone this repository locally (into somewhere you can access through your local webserver).
+2. `cd` into the repository you want to get the network graph for.
+3. Run `/path/to/gitlab-network-graph/scripts/network.sh`. This will take a little while the first time you run it.
+4. Open http://localhost/gitlab-network-graph in your browser (assuming that's where it's accessible from).
+
+To condense scripts 3 and 4 later on, you may want to add a git alias.
+
+Run this once, replacing both the path you've cloned gitlab-network-graph to and the relevant path to your local webserver:
+    git config --global alias.network '!/path/to/gitlab-network-graph/scripts/network.sh && start chrome "http://localhost/gitlab-network-graph"'
+
+Then, whenever you want to see the network graph pop up on your screen, from within the repo you want to see, just run:
+    git network
 
 ## TODO
 
