@@ -43,8 +43,12 @@ log.commits.forEach( function( commit ) {
   });
   delete commit.parents_as_string;
 
-  // Simplify the refs.
-  commit.refs = commit.refs.replace( /,|HEAD ->|tag:|origin\/.*\b/g, ' ' ).replace( /\s+/g, ' ' ).trim();
+  // Remove content we don't need from the refs.
+  commit.refs = commit.refs.replace( /,|HEAD|->|tag:|origin\//g, ' ' ).replace( /\s+/g, ' ' ).trim();
+
+  // Make refs unique, in case we have both origin and local refs.
+  // HT: https://stackoverflow.com/a/14438954/1982136
+  commit.refs = [ ... new Set( commit.refs.split( ' ' ) ) ].join( ' ' );
 
   // Increment time as we go.
   commit.time  = time;
