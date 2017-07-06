@@ -26,10 +26,12 @@ That's classified. For now. Actually there are some basic instructions, more com
 
 To condense scripts 3 and 4 later on, you may want to add a git alias.
 
-Run this once, replacing both the path you've cloned gitlab-network-graph to and the relevant path to your local webserver:
+Run this once, replacing both the path you've cloned gitlab-network-graph to, and the relevant path to your local webserver:
+
     git config --global alias.network '!/path/to/gitlab-network-graph/scripts/network.sh && start chrome "http://localhost/gitlab-network-graph"'
 
 Then, whenever you want to see the network graph pop up on your screen, from within the repo you want to see, just run:
+
     git network
 
 ## TODO
@@ -40,6 +42,10 @@ Then, whenever you want to see the network graph pop up on your screen, from wit
 * Support scrolling down the page.
 * Fix the slight horizontal scroll.
 * Work out if it's possible to automatically open the network graph in Chrome (see bottom of network.sh).
+
+## Contributing
+
+Pull requests and issues are most welcome. Go forth!
 
 ## License
 
