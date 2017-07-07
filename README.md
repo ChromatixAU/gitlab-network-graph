@@ -24,7 +24,7 @@ Firstly, [install node.js](https://nodejs.org/en/download/current/) if you don't
    `git clone https://github.com/ChromatixAU/gitlab-network-graph.git`
 
 2. `cd` into the repository you want to get the network graph for.
-3. Run `scripts/network.sh`. This will take a little while the first time you run it.
+3. Run `/path/to/gitlab-network-graph/scripts/network.sh`. This will take a little while the first time you run it.
 4. Open http://localhost/gitlab-network-graph in your browser (assuming that's where it's accessible from).
 
 To condense steps 3 and 4 later on, you may want to add a git alias:
