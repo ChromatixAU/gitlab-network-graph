@@ -46,6 +46,7 @@ _This tool has been tested in Git Bash on Windows 10 64 bit, with node.js v7.0.0
 * See if it's possible to always show the log from the perspective of `master` at the first space - like GitLab does by default - even when another branch is ahead of master.
 * Work out how to continue rendering on scroll a little earlier than it does now.
 * Support the fancy tooltips like GitLab does.
+* When displaying a ref twice, consider also displaying which one is the remote's.
 * Maybe add to the output a small header/footer with a link to this repo or something.
 * Look at the possibility of making a hosted version of this that uses the GitHub API to pull commit lists from there, for _any_ repository.
 
