@@ -45,11 +45,11 @@ export default (function() {
     this.collectParents();
     this.graphHeight = $(this.element).height();
     this.graphWidth = $(this.element).width();
-    ch = Math.max(this.graphHeight, this.offsetY + this.unitTime * this.mtime + 150);
+    ch = Math.max(this.graphHeight, this.offsetY + this.unitTime * this.mtime + 30); // Chromatix changed: was +150
     cw = Math.max(this.graphWidth, this.offsetX + this.unitSpace * this.mspace + 300);
     this.r = Raphael(this.element.get(0), cw, ch);
     this.top = this.r.set();
-    this.barHeight = Math.max(this.graphHeight, this.unitTime * this.days.length + 320);
+    this.barHeight = Math.max(this.graphHeight, this.unitTime * this.days.length + 30); // Chromatix changed: was +320
     ref = this.commits;
     for (j = 0, len = ref.length; j < len; j += 1) {
       c = ref[j];

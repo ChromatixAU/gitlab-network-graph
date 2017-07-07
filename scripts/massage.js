@@ -35,6 +35,8 @@ log.commits.forEach( function( commit ) {
 
     // Track the 'space' increases for this commit so we can adjust the parent's too.
     if ( 'undefined' === typeof spaces[ parent ] ) {
+      spaces[ parent ] = space;
+    } else {
       spaces[ parent ] = space - commit.space + 1;
     }
 
@@ -46,13 +48,21 @@ log.commits.forEach( function( commit ) {
   // Remove content we don't need from the refs.
   commit.refs = commit.refs.replace( /,|HEAD|->|tag:|origin\//g, ' ' ).replace( /\s+/g, ' ' ).trim();
 
-  // Make refs unique, in case we have both origin and local refs.
+  // Make refs unique, in case we have both origin and local refs, and then sort alphabetically.
   // HT: https://stackoverflow.com/a/14438954/1982136
-  commit.refs = [ ... new Set( commit.refs.split( ' ' ) ) ].join( ' ' );
+  commit.refs = [ ... new Set( commit.refs.split( ' ' ) ) ].sort().join( ' ' );
 
   // Increment time as we go.
   commit.time  = time;
   time++;
+
+  // Further massage some formats to make them identical to the default GitLab output.
+  // This makes diffs for debugging a lot easier.
+  commit.date     = commit.date.replace( '+', '.000+' );
+  commit.message += "\n";
+
+  // Delete temporary properties we don't need anymore.
+  delete commit.parents_as_string;
 
   // Add to the days.
   let date = new Date( commit.date );

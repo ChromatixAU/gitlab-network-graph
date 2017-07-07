@@ -10,3 +10,7 @@ body {
   overflow-y: scroll;
   overflow-x: hidden;
 }
+
+  .network-graph svg {
+    margin-bottom: -4px; /* Remove whitespace at the bottom of the page. */
+  }

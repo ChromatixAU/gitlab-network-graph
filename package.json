@@ -1,6 +1,6 @@
 {
   "name": "gitlab-network-graph",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "An attempt to make the excellent GitLab network graph portable.",
   "repository": {
     "type": "git",
