@@ -51,5 +51,9 @@ git log --all --pretty=format:'    {
 echo Massaging data...
 `dirname $0`/massage.js
 
+# Place a GitHub URL based on the origin remote.
+GIT_REMOTE=`git ls-remote --get-url | sed 's,\\.git,/commit/%s,g' | sed 's,:,/,g' | sed 's,git@,https://,g'`
+sed -e 's,data-commit-url=".*",data-commit-url="'$GIT_REMOTE'",g' index.html > index.html.tmp && mv index.html.tmp index.html
+
 echo
 echo Done.

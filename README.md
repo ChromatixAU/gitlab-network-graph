@@ -45,7 +45,6 @@ _This tool has been tested in Git Bash on Windows 10 64 bit, with node.js v7.0.0
 * See if it's possible to disable/work-around a caching issue that occasionally pops up - the data _should_ refresh from disk every time.
 * See if it's possible to always show the log from the perspective of `master` at the first space - like GitLab does by default - even when another branch is ahead of master.
 * Work out how to continue rendering on scroll a little earlier than it does now.
-* Link each commit to their GitHub diff links (eg. draw from the origin remote URL to link to /commit/HASH).
 * Support the fancy tooltips like GitLab does.
 * Maybe add to the output a small header/footer with a link to this repo or something.
 * Look at the possibility of making a hosted version of this that uses the GitHub API to pull commit lists from there, for _any_ repository.
