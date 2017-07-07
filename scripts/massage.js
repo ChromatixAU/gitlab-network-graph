@@ -21,6 +21,9 @@ let parent_frees  = {};
 
 log.commits.forEach( function( commit ) {
 
+  // Debug
+  commit.debug = [];
+
   // Set the gravatar hash for the author's e-mail address.
   let hash = crypto.createHash( 'md5' ).update( commit.author.email.toLowerCase() ).digest( 'hex' );
   commit.author.icon = 'https://secure.gravatar.com/avatar/' + hash + '?s=40&d=wavatar';
@@ -43,6 +46,9 @@ log.commits.forEach( function( commit ) {
     commit.parents.push([ parent, space ]);
     active_spaces[ 'space' + space ] = true;
 
+    // Debug
+    commit.debug.push( 'activates ' + space );
+
     // Track which spaces need to be freed when this parent is reached.
     if ( 'undefined' === typeof parent_frees[ 'parent' + parent ] ) {
       parent_frees[ 'parent' + parent ] = [];
@@ -57,7 +63,12 @@ log.commits.forEach( function( commit ) {
 
       // Prevent the current commit from freeing the space early, as the parent will need to handle it.
       if ( 'undefined' !== typeof parent_frees[ 'parent' + commit.id ] ) {
+
+        // Debug
+        commit.debug.push( 'prevents early freeing of ' + space );
+
         delete parent_frees[ 'parent' + commit.id ][ parent_frees[ 'parent' + commit.id ].indexOf( space ) ];
+
       }
     }
 
@@ -70,11 +81,19 @@ log.commits.forEach( function( commit ) {
 
         // Prevent freeing a space if the current commit AND a parent of it are still occupying the same space.
         if ( spaces[ commit.id ] === space_to_free && spaces[ parent ] === space_to_free ) {
+
+          // Debug
+          commit.debug.push( 'prevents freeing of ' + space_to_free );
+
           return;
+
         }
 
         // Free the space.
         active_spaces[ 'space' + space_to_free ] = false;
+
+        // Debug
+        commit.debug.push( 'frees ' + space_to_free );
 
       });
 
