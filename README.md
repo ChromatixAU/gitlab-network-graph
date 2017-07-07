@@ -23,7 +23,7 @@ Firstly, [install node.js](https://nodejs.org/en/download/current/) if you don't
 
    `git clone https://github.com/ChromatixAU/gitlab-network-graph.git`
 
-2. `cd` into the repository you want to get the network graph for.
+2. `cd` into any _other_ repository you have - i.e. one that you want to get the network graph for!
 3. Run `/path/to/gitlab-network-graph/scripts/network.sh`. This will take a little while the first time you run it.
 4. Open http://localhost/gitlab-network-graph in your browser (assuming that's where it's accessible from).
 
@@ -41,7 +41,7 @@ _This tool has been tested in Git Bash on Windows 10 64 bit, with node.js v7.0.0
 
 ## TODO
 
-* Tweak the parent 'space' detection to match how GitLab does it - we're not quite there yet.
+* Tweak the parent 'space' detection to match how GitLab does it - we're not quite there yet (in progress on `space-detection` branch).
 * See if it's possible to disable/work-around a caching issue that occasionally pops up - the data _should_ refresh from disk every time.
 * See if it's possible to always show the log from the perspective of `master` at the first space - like GitLab does by default - even when another branch is ahead of master.
 * Work out how to continue rendering on scroll a little earlier than it does now.
