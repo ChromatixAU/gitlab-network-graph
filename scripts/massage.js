@@ -21,8 +21,6 @@ let parent_frees  = {};
 
 log.commits.forEach( function( commit ) {
 
-  commit.spaces_not_to_free = [];
-
   // Set the gravatar hash for the author's e-mail address.
   let hash = crypto.createHash( 'md5' ).update( commit.author.email.toLowerCase() ).digest( 'hex' );
   commit.author.icon = 'https://secure.gravatar.com/avatar/' + hash + '?s=40&d=wavatar';
@@ -36,7 +34,6 @@ log.commits.forEach( function( commit ) {
   commit.parents_as_string.split( ' ' ).forEach( function( parent ) {
 
     commit.parents.push([ parent, space ]);
-
     active_spaces[ 'space' + space ] = true;
 
     // Track which spaces need to be freed when this parent is reached.
@@ -50,27 +47,28 @@ log.commits.forEach( function( commit ) {
       spaces[ parent ] = space;
     } else {
       spaces[ parent ] = space - commit.space + 1;
+
+      // Prevent the current commit from freeing the space early, as the parent will need to handle it.
+      delete parent_frees[ 'parent' + commit.id ][ parent_frees[ 'parent' + commit.id ].indexOf( space ) ];
     }
 
     // Increment the space that the next parent will occupy.
     space += 2;
 
-    // Check if there's any active spaces we're finished with at this point, before we move on.
+    // Check if there's any active spaces we need to free at this point.
     if ( 'undefined' !== typeof parent_frees[ 'parent' + commit.id ] ) {
       parent_frees[ 'parent' + commit.id ].forEach( function( space_to_free ) {
 
-        // Prevent freeing this space if the current commit AND a parent of it are still occupying the same space.
+        // Prevent freeing a space if the current commit AND a parent of it are still occupying the same space.
         if ( spaces[ commit.id ] === space_to_free && spaces[ parent ] === space_to_free ) {
-          //commit.spaces_not_to_free.push( space_to_free );
-          //return;
+          return;
         }
 
         // Free the space.
-        if ( -1 === commit.spaces_not_to_free.indexOf( space_to_free ) ) {
-          active_spaces[ 'space' + space_to_free ] = false;
-        }
+        active_spaces[ 'space' + space_to_free ] = false;
 
       });
+
     }
 
     // If there are active spaces we need to avoid for the next parent, keep going until we find a free one.
