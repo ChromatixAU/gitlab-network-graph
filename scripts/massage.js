@@ -49,7 +49,9 @@ log.commits.forEach( function( commit ) {
       spaces[ parent ] = space - commit.space + 1;
 
       // Prevent the current commit from freeing the space early, as the parent will need to handle it.
-      delete parent_frees[ 'parent' + commit.id ][ parent_frees[ 'parent' + commit.id ].indexOf( space ) ];
+      if ( 'undefined' !== typeof parent_frees[ 'parent' + commit.id ] ) {
+        delete parent_frees[ 'parent' + commit.id ][ parent_frees[ 'parent' + commit.id ].indexOf( space ) ];
+      }
     }
 
     // Increment the space that the next parent will occupy.
