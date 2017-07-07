@@ -21,7 +21,7 @@ let parent_frees  = {};
 
 log.commits.forEach( function( commit ) {
 
-  commit.debug = [];
+  commit.spaces_not_to_free = [];
 
   // Set the gravatar hash for the author's e-mail address.
   let hash = crypto.createHash( 'md5' ).update( commit.author.email.toLowerCase() ).digest( 'hex' );
@@ -48,10 +48,8 @@ log.commits.forEach( function( commit ) {
     // Track the 'space' increases for this commit so we can adjust the parent's too.
     if ( 'undefined' === typeof spaces[ parent ] ) {
       spaces[ parent ] = space;
-      commit.debug.push( 'Sets parent ' + parent + ' space to ' + spaces[ parent ] + ' (first time for this parent).' );
     } else {
       spaces[ parent ] = space - commit.space + 1;
-      commit.debug.push( 'Sets parent ' + parent + ' space to ' + spaces[ parent ] + ' (' + commit.space + ') (subsequent time for this parent).' );
     }
 
     // Increment the space that the next parent will occupy.
@@ -61,26 +59,26 @@ log.commits.forEach( function( commit ) {
     if ( 'undefined' !== typeof parent_frees[ 'parent' + commit.id ] ) {
       parent_frees[ 'parent' + commit.id ].forEach( function( space_to_free ) {
 
-        // Do not free this space yet if the current commit is occupying the same space.
+        // Prevent freeing this space if the current commit AND a parent of it are still occupying the same space.
         if ( spaces[ commit.id ] === space_to_free && spaces[ parent ] === space_to_free ) {
-          commit[ 'do_not_free_space_' + space_to_free ] = true;
+          //commit.spaces_not_to_free.push( space_to_free );
+          //return;
         }
 
         // Free the space.
-        if ( 'undefined' === typeof commit[ 'do_not_free_space_' + space_to_free ] ) {
+        if ( -1 === commit.spaces_not_to_free.indexOf( space_to_free ) ) {
           active_spaces[ 'space' + space_to_free ] = false;
         }
 
       });
     }
 
-    // Check if there's any active spaces we need to avoid for the next parent.
+    // If there are active spaces we need to avoid for the next parent, keep going until we find a free one.
     while ( 'undefined' !== typeof active_spaces[ 'space' + space ] && active_spaces[ 'space' + space ] ) {
       space += 2;
     }
 
-  });
-  delete commit.parents_as_string;
+  }); // Foreach parents of this commit.
 
   // Remove content we don't need from the refs.
   commit.refs = commit.refs.replace( /,|HEAD|->|tag:|origin\//g, ' ' ).replace( /\s+/g, ' ' ).trim();
