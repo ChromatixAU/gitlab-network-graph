@@ -16,8 +16,12 @@ log.days = [];
 
 // Prepare the 'space' tracking object.
 let spaces = {};
+let active_spaces = {};
+let parent_frees  = {};
 
 log.commits.forEach( function( commit ) {
+
+  commit.debug = [];
 
   // Set the gravatar hash for the author's e-mail address.
   let hash = crypto.createHash( 'md5' ).update( commit.author.email.toLowerCase() ).digest( 'hex' );
@@ -33,14 +37,47 @@ log.commits.forEach( function( commit ) {
 
     commit.parents.push([ parent, space ]);
 
+    active_spaces[ 'space' + space ] = true;
+
+    // Track which spaces need to be freed when this parent is reached.
+    if ( 'undefined' === typeof parent_frees[ 'parent' + parent ] ) {
+      parent_frees[ 'parent' + parent ] = [];
+    }
+    parent_frees[ 'parent' + parent ].push( space );
+
     // Track the 'space' increases for this commit so we can adjust the parent's too.
     if ( 'undefined' === typeof spaces[ parent ] ) {
       spaces[ parent ] = space;
+      commit.debug.push( 'Sets parent ' + parent + ' space to ' + spaces[ parent ] + ' (first time for this parent).' );
     } else {
       spaces[ parent ] = space - commit.space + 1;
+      commit.debug.push( 'Sets parent ' + parent + ' space to ' + spaces[ parent ] + ' (' + commit.space + ') (subsequent time for this parent).' );
     }
 
+    // Increment the space that the next parent will occupy.
     space += 2;
+
+    // Check if there's any active spaces we're finished with at this point, before we move on.
+    if ( 'undefined' !== typeof parent_frees[ 'parent' + commit.id ] ) {
+      parent_frees[ 'parent' + commit.id ].forEach( function( space_to_free ) {
+
+        // Do not free this space yet if the current commit is occupying the same space.
+        if ( spaces[ commit.id ] === space_to_free && spaces[ parent ] === space_to_free ) {
+          commit[ 'do_not_free_space_' + space_to_free ] = true;
+        }
+
+        // Free the space.
+        if ( 'undefined' === typeof commit[ 'do_not_free_space_' + space_to_free ] ) {
+          active_spaces[ 'space' + space_to_free ] = false;
+        }
+
+      });
+    }
+
+    // Check if there's any active spaces we need to avoid for the next parent.
+    while ( 'undefined' !== typeof active_spaces[ 'space' + space ] && active_spaces[ 'space' + space ] ) {
+      space += 2;
+    }
 
   });
   delete commit.parents_as_string;
