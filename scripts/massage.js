@@ -25,8 +25,15 @@ log.commits.forEach( function( commit ) {
   let hash = crypto.createHash( 'md5' ).update( commit.author.email.toLowerCase() ).digest( 'hex' );
   commit.author.icon = 'https://secure.gravatar.com/avatar/' + hash + '?s=40&d=wavatar';
 
-  // Check what 'space' we are meant to be at.
-  commit.space = 'undefined' === typeof spaces[ commit.id ] ? 1 : spaces[ commit.id ];
+  // Check what 'space' we are meant to be at. If we're starting a new level, we'll also need to check it's not taken.
+  if ( 'undefined' === typeof spaces[ commit.id ] ) {
+    commit.space = 1;
+    while ( 'undefined' !== typeof active_spaces[ 'space' + commit.space ] && active_spaces[ 'space' + commit.space ] ) {
+      commit.space += 2;
+    }
+  } else {
+    commit.space = spaces[ commit.id ];
+  }
 
   // Split the parents into separate arrays in the format GitLab requires.
   let space = commit.space;
