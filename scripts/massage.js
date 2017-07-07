@@ -91,6 +91,14 @@ log.commits.forEach( function( commit ) {
   commit.time  = time;
   time++;
 
+  // Further massage some formats to make them identical to the default GitLab output.
+  // This makes diffs for debugging a lot easier.
+  commit.date     = commit.date.replace( '+', '.000+' );
+  commit.message += "\n";
+
+  // Delete temporary properties we don't need anymore.
+  delete commit.parents_as_string;
+
   // Add to the days.
   let date = new Date( commit.date );
   log.days.push([ date.getDate(), date.toLocaleString( 'en-au', { month: 'short' }) ]);
