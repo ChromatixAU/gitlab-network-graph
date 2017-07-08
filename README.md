@@ -25,6 +25,7 @@ Firstly, [install node.js](https://nodejs.org/en/download/current/) if you don't
 
 2. `cd` into any _other_ repository you have - i.e. one that you want to get the network graph for!
 3. Run `/path/to/gitlab-network-graph/scripts/network.sh`. This will take a little while the first time you run it.
+    * Depending on your environment you may need to `chmod +x` this script before you can run it.
 4. Open http://localhost/gitlab-network-graph in your browser (assuming that's where it's accessible from).
 
 To condense steps 3 and 4 later on, you may want to add a git alias:
@@ -48,6 +49,7 @@ _This tool has been tested in Git Bash on Windows 10 64 bit, with node.js v7.0.0
 * Support the fancy tooltips like GitLab does.
 * When displaying a ref twice, consider also displaying which one is the remote's.
 * Maybe add to the output a small header/footer with a link to this repo or something.
+* Bundle a node.js http server so that it doesn't need to rely on the user having a server running OR look at whether the loading can be modified to not use AJAX so that it can run directly off the local filesystem.
 * Look at the possibility of making a hosted version of this that uses the GitHub API to pull commit lists from there, for _any_ repository.
 
 ## Contributing
