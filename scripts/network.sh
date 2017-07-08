@@ -53,7 +53,7 @@ echo Massaging data...
 
 # Place a GitHub URL based on the origin remote.
 GIT_REMOTE=`git ls-remote --get-url | sed 's,\\.git,/commit/%s,g' | sed 's,:,/,g' | sed 's,git@,https://,g'`
-sed -e 's,data-commit-url=".*",data-commit-url="'$GIT_REMOTE'",g' `dirname $0`/index.html > `dirname $0`/index.html.tmp && mv `dirname $0`/index.html.tmp `dirname $0`/index.html
+sed -e 's,data-commit-url=".*",data-commit-url="'$GIT_REMOTE'",g' `dirname $0`/../index.html > `dirname $0`/../index.html.tmp && mv `dirname $0`/../index.html.tmp `dirname $0`/../index.html
 
 echo
 echo Done.
