@@ -38,6 +38,9 @@ log.commits.forEach( function( commit ) {
     commit.space = spaces[ commit.id ];
   }
 
+  // Debug
+  commit.debug.push( 'starts at ' + commit.space );
+
   // Split the parents into separate arrays in the format GitLab requires.
   let space = commit.space;
   commit.parents = [];
